@@ -1,0 +1,19 @@
+<div class="login-container">
+    <!-- TARJETA PRINCIPAL -->
+    <div class="login-card">
+        <!-- TARJETA DE LOGO -->
+        <div class="logo-section">
+            <h1>Sistema ADSO</h1>
+            <p>Iniciar Sesión </p>
+        </div>
+        <div class="form-group">
+            <label> Correo Electrónico</label>
+            <input type="Email" [(ngModel)]="email" placeholder="ingrese su correo">
+        </div>
+        <div class="form-group">
+            <label >Contraseña</label>
+            <input type="password" [(ngModel)]="password"  placeholder="ingrese su contraseña">
+        </div>
+        <button (click)="login()" >Ingresar</button>
+    </div>
+</div>
