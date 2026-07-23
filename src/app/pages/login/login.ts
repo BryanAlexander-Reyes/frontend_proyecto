@@ -1,14 +1,22 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from "@angular/router";
+
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule,],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class LoginComponent {
+
+  // constructor para usar las rutas internas
+  constructor(private router:Router){
+    
+  }
+
   // CREAR VARIABLE PARA ALMACENAR CORREO
   email: string ='';
 
@@ -31,5 +39,8 @@ export class LoginComponent {
     // modal para cuando se haga click al boton 
     alert('la contraseña no coincide. \n\n' + 'la contraseña ingresada fue:' + this.password);
   }
+  }
+  goToRegister():void{
+  this.router.navigate(['/register'])
   }
 }

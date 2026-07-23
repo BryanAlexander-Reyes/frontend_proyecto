@@ -2,6 +2,62 @@
 <div class="register-container">
     <!--  -->
     <div class="register-card">
-
+        <div class="header">
+            <h1>Registro de usuario</h1>
+            <p>Complete la informacion para crear una cuenta.</p>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input 
+            id="nombre"
+            type="text"
+            name='nombre'
+            placeholder="Ingrese su nombre"
+            [(ngModel)]="nombre"
+        >
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input 
+            id="apellido"
+            type="text"
+            name="apellido"
+            placeholder="ingrese su apellido"
+            [(ngModel)]="apellido"
+            >
+        </div>
+        <div class="form-group">
+            <label for="correo">Correo electrónico</label>
+            <input 
+            id="correo"
+            type="email"
+            name="correo"
+            placeholder="Ejemplo@correo.com"
+            [(ngModel)]="correo"
+            >
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input 
+            id="password"
+            type="password"
+            name="password"
+            placeholder="ingrese su contraseña"
+            [(ngModel)]="password"
+            >
+        </div>
+        <div class="form-group">
+            <label for="confirmarPassword">Confirmar contraseña</label>
+            <input 
+            id="confirmarPassword"
+            type="password"
+            name="confirmarPassword"
+            placeholder="Confirme la contraseña"
+            [(ngModel)]="confirmarpassword"
+            >
+        </div>
+        <button type="button" (click)="registroUsuario()">
+            Registrarse
+        </button>
     </div>
 </div>

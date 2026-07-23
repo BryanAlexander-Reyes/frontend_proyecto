@@ -13,6 +13,11 @@ export const routes: Routes = [
     // ruta principal de la app
     {
         path:'',
+        redirectTo:'login',
+        pathMatch:'full'
+    },
+    {
+        path:'login',
         component: LoginComponent,
     },
     // Ruta de componente register
