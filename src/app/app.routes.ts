@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 // importacion del componente login
 
 import { LoginComponent } from './pages/login/login'
+import { RegisterComponent } from './pages/register/register'
 
 // Definición de rutras de la aplicación 
 
@@ -13,5 +14,10 @@ export const routes: Routes = [
     {
         path:'',
         component: LoginComponent,
+    },
+    // Ruta de componente register
+    {
+        path:'register',
+        component:RegisterComponent
     }
 ];
