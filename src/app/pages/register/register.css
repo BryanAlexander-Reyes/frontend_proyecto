@@ -60,6 +60,11 @@
 .form-group input:focus{
     outline: none;
     border-color: #2563eb;
+    box-shadow: 0 0 8px rgba(37, 99, 2035, .25);
+}
+
+span{
+    color: #dc2626;
 }
 
 /* style boton */
@@ -74,8 +79,36 @@ button{
     font-size: 16px;
     cursor: pointer;
     transition:.3s;
+    font-weight: 600;
+    margin-top:10px;
+}
+
+button:hover:not(:disabled){
+    background: #1d4ed8;
+    transform: translate(-2px);
 }
 
 button:hover{
     background: #1d4ed8;
+}
+
+button:disabled{
+    background: #94a3b8;
+    cursor:not-allowed;
+}
+
+.error{
+    display: block;
+    margin-top: 6px;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+input.ng-invalid.ng-touched{
+    border:2px solid #dc2626;
+}
+
+input.ng-valid.ng-touched{
+    border:solid #16a34a;
 }
