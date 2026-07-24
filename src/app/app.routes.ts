@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 
 import { LoginComponent } from './pages/login/login'
 import { RegisterComponent } from './pages/register/register'
+import { DashboardComponent } from './pages/dashboard/dashboard';
 
 // Definición de rutras de la aplicación 
 
@@ -24,5 +25,10 @@ export const routes: Routes = [
     {
         path:'register',
         component:RegisterComponent
+    },
+    // Ruta del componente de dashboard
+    {
+        path:'dashboard',
+        component: DashboardComponent
     }
 ];
