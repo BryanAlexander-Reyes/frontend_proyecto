@@ -30,19 +30,64 @@
          <div class="cards">
             <div class="card">
                 <h3>Usuarios</h3>
-                <p>120</p>
+                <p>{{estadisticas.usuarios}}</p>
             </div>
             <div class="card">
                 <h3>Roles</h3>
-                <p>8</p>
+                <p>{{estadisticas.roles}}</p>
             </div>
             <div class="card">
-                <h3>Publicaciones</h3>
-                <p>350</p>
+                <h3>Cursos</h3>
+                <p>{{estadisticas.cursos}}</p>
             </div>
          </div>
+         <!-- GRAFICA CON SECCION NUEVA -->
          <section class="workspace">
-            <h2>Bienvenido al sistema ADSO</h2>
+            <h2>Activadad mensual</h2>
+            <p>Representacion grafica utilizando unicamente HTML, CSS, Angular.</p>
+            <div class="chart">
+                @for (item of grafica; track item.mes) {
+                    <div class="bar-container">
+                        <div class="bar" [style.height.%]="item.valor">
+
+                        </div>
+                        <span>{{item.mes}}</span>
+                    </div>
+                }
+            </div>
+         </section>
+         <!-- tabla de datos -->
+         <section class="workspace">
+            <h2>Ultimos usuarios registrados</h2>
+            <p>Total registrados:
+                <strong>{{obtenerTotalUsuarios()}}</strong>
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (usuario of usuarios; track usuario.id) {
+                        <tr>
+                            <td>{{usuario.id}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>{{usuario.correo}}</td>
+                            <td>{{usuario.rol}}</td>
+                            <td>{{usuario.estado}}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+         </section>
+
+         <section class="workspace">
+            <h2>Area de trabajo</h2>
             <p>
                 Desde este panel podran administrar la información del sistema, gestionar usuarios, consultar reportes y acceder a las diferentes funcionalidades disponibles.
             </p>
