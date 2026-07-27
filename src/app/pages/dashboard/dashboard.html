@@ -1,3 +1,58 @@
 <div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Sistema ADSO</h2>
+        </div>
+        <nav>
+            <ul>
+                <li>🏠 Inicio</li>
+                <li>👤 Usuario</li>
+                <li>🤚 Roles</li>
+                <li>😶‍🌫️ Reportes</li>
+                <li>⚙️ Configuracion</li>
+                <li>🏃‍♂️ Cerar sesión</li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="content">
+        <div class="header">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Panel Principal del sistema</p>
+            </div>
+            <div class="user-info">
+                <strong>{{usuario}}</strong>
+                <span>{{rol}}</span>
+
+            </div>
+        </div>
+        <!-- Tarjeta de informacion -->
+         <div class="cards">
+            <div class="card">
+                <h3>Usuarios</h3>
+                <p>120</p>
+            </div>
+            <div class="card">
+                <h3>Roles</h3>
+                <p>8</p>
+            </div>
+            <div class="card">
+                <h3>Publicaciones</h3>
+                <p>350</p>
+            </div>
+         </div>
+         <section class="workspace">
+            <h2>Bienvenido al sistema ADSO</h2>
+            <p>
+                Desde este panel podran administrar la información del sistema, gestionar usuarios, consultar reportes y acceder a las diferentes funcionalidades disponibles.
+            </p>
+            <button type="button"
+            (click)="mostrarMensaje()"> 
+            Mostrar mensaje
+            </button>
+         </section>
+    </main>
     
+
+
 </div>
