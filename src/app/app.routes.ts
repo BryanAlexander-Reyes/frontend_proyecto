@@ -6,7 +6,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login'
 import { RegisterComponent } from './pages/register/register'
 import { DashboardComponent } from './pages/dashboard/dashboard';
-
+import { UsersComponent } from './pages/users/users';
 // Definición de rutras de la aplicación 
 
 
@@ -30,5 +30,10 @@ export const routes: Routes = [
     {
         path:'dashboard',
         component: DashboardComponent
-    }
+    },
+    // ruta de componente de usuario
+    {
+        path:'users',
+        component: UsersComponent
+    },
 ];

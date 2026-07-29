@@ -8,18 +8,22 @@
 .dashboard-container{
     display: flex;
     min-height: 100vh;
-    background: #f1f5f9;
+    background: #f8fafc;
 }
 
 .sidebar{
     width: 260px;
+    min-width: 260px;
     background:#0f172a;
     color: white;
-    padding: 25px;
+    padding: 24px 16px;
 }
-
+.logo{
+    margin-bottom: 40px;
+}
 .logo h2{
     text-align: center;
+    letter-spacing: 1px;
 }
 
 .sidebar ul{
@@ -31,17 +35,21 @@
     align-items: center;
     gap:10px;
     transition: .3s;
-
+    padding: 12px 16px ;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
-.sidebarli:hover{
+.sidebar li:hover{
     background: #2563eb;
     padding-left: 25px;
 }
 
 .content{
     flex: 1;
-    padding: 30px;
+    padding: 35px;
+    overflow: auto;
 }
 
 .header{
@@ -50,6 +58,7 @@
     align-items: center;
     margin-bottom: 30px;
     border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 20px;
 }
 .user-info{
     display: flex;
@@ -82,10 +91,11 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
     transition: .3s;
     cursor: pointer;
-    border-left: 6px #2563eb;
+    border-left: 6px solid #2563eb;
 }
 
 .car h3{
+    font-size: 1.2rem;
     margin-bottom: 10px;
     color: #474569;
 }
@@ -114,13 +124,14 @@
 
 .workspace p{
     margin-bottom: 20px;
+    color: #64748b;
 }
 
 button{
     padding: 12px 20px;
     border: none;
     border-radius:8px;
-    background: #3b73ec;
+    background: #2563eb;
     color: white;
     cursor:pointer;
     font-size: 15px;
@@ -146,7 +157,8 @@ button:hover{
     flex-direction: column;
     align-items: center;
     width: 60px;
-
+    justify-content: flex-end;
+    height: 280px;
 }
 
 .bar{
@@ -195,4 +207,22 @@ tbody tr{
 
 tbody tr:hover{
     background: #eff6ff;
+}
+
+@media (max-width:900px){
+    .cards{
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-container{
+        flex-direction: column;
+        min-height: 100vh;
+        background: #e2fefc;
+    }
+    .sidebar{
+        width: 100%;
+    }
+    .chart{
+        overflow-x: auto;
+    }
 }
