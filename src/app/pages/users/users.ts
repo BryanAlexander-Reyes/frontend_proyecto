@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgForOf } from "../../../../node_modules/@angular/common/types/_common_module-chunk";
 
 interface Usuario{
   id:number;
@@ -11,7 +12,7 @@ interface Usuario{
 }
 @Component({
   selector: 'app-users',
-  imports: [FormsModule],
+  imports: [FormsModule, NgForOf],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
