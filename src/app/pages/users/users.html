@@ -1,66 +1,99 @@
-<div class="users-container">
-    <div class="page-header">
-        <h1>
-            Gestion de Usuarios
-        </h1>
-        <p>Administración de usuarios registrados ene el sistema </p>
-    </div>
+<div class="user-container">
+  <div class="page-wrapper">
+    <section class="page-header">
+      <div class="header-info">
+        <div class="header-icon">😶‍🌫️</div>
+        <div>
+          <h1>Gestión de Usuarios</h1>
+          <p>Administración de usuarios registrados en el sistema</p>
+        </div>
+      </div>
+    </section>
     <div class="content">
-        <section class="form-panel">
-            <h2>Registrar Usuario</h2>
-            <label for="nombre">Nombre</label>
-            <input type="text"
-            id="nombre"
-            placeholder="Ingrese el nombre"
-            [(ngModel)]="nombre"
-            >
-            <label for="apellido">Apellido</label>
-            <input type="text"
-            id="apellido"
-            placeholder="Ingrese el apellido"
-            [(ngModel)]="apellido">
-            <label for="correo">Email</label>
-            <input id="correo"type="email"
-            placeholder="correo@sena.edu.co"
-            [(ngModel)]="correo">
-            <label for="rol">ROL</label>
-            <select [ngModel]="rol">
-                <option>Administrador</option>
-                <option>Instructor</option>
-                <option>Aprendiz</option>
-            </select>
-            <label>
-                <input type="checkbox" [(ngModel)]="estado">Usuario Activo
-            </label>
-            <div class="buttnos">
-                <button (click)="registrarUsuario()" >Registrar</button>
-                <button (click)="limpiarFormulario()">Limpiar</button>
-            </div>
-        </section>
-        <section class="table-panel">
-            <h2>Usuarios Registrados</h2>
-            <table> 
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Esyado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let usuario of usuarios">
-                        <td>{{usuario.id}}</td>
-                        <td>{{usuario.nombre}}</td>
-                        <td>{{usuario.apellido}}</td>
-                        <td>{{usuario.correo}}</td>
-                        <td>{{usuario.rol}}</td>
-                        <td>{{usuario.estado?'activo':'Inactivo'}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+      <section class="form-panel">
+        <div class="panel-title">
+          <span> ➕ </span>
+          <h2>Registrar Usuario</h2>
+        </div>
+        <div
+          *ngIf="mensajes"
+          class="alert"
+          [class.success]="tipoMensaje === 'success'"
+          [class.error]="tipoMensaje === 'error'"
+        >
+          {{ mensajes }}
+        </div>
+        <div class="form-group">
+          <label> Nombre </label>
+          <input type="text" placeholder="Ingrese su Nombre" [(ngModel)]="nombre" />
+        </div>
+        <div class="form-group">
+          <label> Apellido </label>
+          <input type="text" placeholder="Ingrese su Apellido" [(ngModel)]="apellido" />
+        </div>
+        <div class="form-group">
+          <label> Correo </label>
+          <input type="email" placeholder="Correo@sena.edu.co" [(ngModel)]="correo" />
+        </div>
+        <div class="form-group">
+          <label for="rolSelect"> Rol </label>
+          <select id="rolSelect" name="rol" title="Seleccione el rol" [(ngModel)]="rol">
+            <option value="Administrador">Administrador</option>
+            <option value="Instructor">Instructor</option>
+            <option value="Aprendiz">Aprendiz</option>
+          </select>
+        </div>
+        <div class="checkbox-group">
+          <label> <input type="checkbox" [(ngModel)]="estado" /> Usuario activo </label>
+        </div>
+        <div class="buttons">
+          <button class="btn-primary" (click)="registrarUsuario()">Registrar</button>
+          <button class="btn-secundary" (click)="limpiarFormulario()">Limpiar</button>
+        </div>
+      </section>
+
+      <section class="table-panel">
+        <div class="panel-title">
+          <span> 📓 </span>
+          <h2>Usuario Registrado</h2>
+          <p class="table-info">
+            Total de usuarios: <strong> {{ obtenerTotalUsuarios() }} </strong>
+          </p>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios">
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido }}</td>
+                <td>{{ usuario.correo }}</td>
+                <td>{{ usuario.rol }}</td>
+                <td>
+                  <span
+                    class="status-badge"
+                    [class.active]="usuario.estado"
+                    [class.inactive]="!usuario.estado"
+                  >
+                    {{ usuario.estado ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
+    <footer class="page-footer">Sistema ADSO - Panel de Administración</footer>
+  </div>
 </div>
