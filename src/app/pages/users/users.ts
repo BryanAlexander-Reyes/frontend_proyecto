@@ -111,6 +111,23 @@ export class UsersComponent implements OnInit {
 
   registrarUsuario():void{
 
+    
+    if(this.idEditar!=null){
+      const usuario=this.usuarios.find(u=>u.id==this.idEditar);
+      if(usuario){
+        usuario.nombre=this.nombre;
+        usuario.apellido=this.apellido;
+        usuario.correo=this.correo;
+        usuario.rol=this.rol;
+        usuario.estado=this.estado;
+      }
+      this.idEditar=null;
+      this.buscarUsuarios();
+      alert('Usuario Actualizado')
+      this.limpiarFormulario();
+      return
+    }
+
     // validacion de campos
     if(this.nombre.trim()===''|| this.apellido.trim()===''||this.correo.trim()===''){
       this.tipoMensaje='error';
@@ -131,6 +148,8 @@ export class UsersComponent implements OnInit {
       this.mensajes='El correo ya se encuentra registrado.';
       return
     }
+    
+
 
     // se construye un nuevo objeto usuario utilizando la informacion ingresada en el formulario
     const nuevoUsuario:Usuario={
@@ -143,6 +162,7 @@ export class UsersComponent implements OnInit {
     };
     // agrega el nuevo objeto al arreglo
     this.usuarios.push(nuevoUsuario);
+    this.buscarUsuarios();
     this.tipoMensaje='success';
     this.mensajes='Usuario registrados correctamente.';
 
@@ -171,5 +191,23 @@ export class UsersComponent implements OnInit {
 
       return coincideTexto && coincideRol;
     });
+  }
+
+  editarUsuario(usuario:Usuario):void{
+    this.idEditar=usuario.id;
+    this.nombre=usuario.nombre;
+    this.apellido=usuario.apellido;
+    this.correo=usuario.correo;
+    this.rol=usuario.rol;
+    this.estado=usuario.estado;
+  }
+
+  eliminarUsuario(id:number):void{
+    const respuesta=confirm('¿Desea eliminar este usuario?')
+    if(!respuesta){
+      return
+    }
+    this.usuarios=this.usuarios.filter(usuario=>usuario.id!=id);
+    this.buscarUsuarios();
   }
 }

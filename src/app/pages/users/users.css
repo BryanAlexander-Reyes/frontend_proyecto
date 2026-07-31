@@ -247,6 +247,51 @@ tbody tr:hover {
     animation: fadeIn .6s ease;
 }
 
+.toolbar{
+    display: flex;
+    gap:15px;
+    margin-bottom: 20px;
+}
+
+.toolbar input{
+    flex: 1;
+    padding: 12px;
+    border: 1px solid#cbd5e1;
+    border-radius: 8px;
+}
+
+.toolbar select{
+    width: 220px;
+    padding: 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+}
+
+.btn-edit{
+    background: #facc15;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.btn-delete{
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-etit:hover{
+    background: #eab308;
+}
+.btn-delete:hover{
+    background: #dc2626;
+}
+
 @keyframes fadeIn {
     from{
         opacity: 0;

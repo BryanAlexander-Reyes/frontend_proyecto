@@ -13,7 +13,7 @@
       <section class="form-panel">
         <div class="panel-title">
           <span> ➕ </span>
-          <h2>Registrar Usuario</h2>
+          <h2>{{idEditar==null?'Registrar Usuario':'Actualizar usuario'}}</h2>
         </div>
         <div
           *ngIf="mensajes"
@@ -47,7 +47,7 @@
           <label> <input type="checkbox" [(ngModel)]="estado" /> Usuario activo </label>
         </div>
         <div class="buttons">
-          <button class="btn-primary" (click)="registrarUsuario()">Registrar</button>
+          <button class="btn-primary" (click)="registrarUsuario()">{{idEditar==null?'registro':'Actualizar'}}</button>
           <button class="btn-secundary" (click)="limpiarFormulario()">Limpiar</button>
         </div>
       </section>
