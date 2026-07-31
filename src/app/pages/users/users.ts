@@ -28,6 +28,16 @@ export class UsersComponent implements OnInit {
   // variables de listas para usuarios, un arreglo de usuario
 
   usuarios:Usuario[]=[];
+  
+  // LISTA FILTRADA
+  usuariosFiltrados:Usuario[]=[];
+
+  // INPUT DE BUSQUEDA
+  textoBusqueda:string='';
+  // IMPLEMENTACION DEL FILTRO
+  filtroRol:string='';
+  // ID EN EDICION
+  idEditar:number | null=null;
 
   // mensajes de errores
   mensajes:string=''
@@ -42,6 +52,7 @@ export class UsersComponent implements OnInit {
   // linea que utiliza metodo para iniciar desde el principio
   ngOnInit(): void {
     this.cargarDatosIniciales();
+    this.usuariosFiltrados=[...this.usuarios]
   }
 
   cargarDatosIniciales():void{
@@ -147,5 +158,18 @@ export class UsersComponent implements OnInit {
   }
   obtenerTotalUsuarios():number{
     return this.usuarios.length;
+  }
+  buscarUsuarios():void{
+    this.usuariosFiltrados=this.usuarios.filter(usuario=>{
+      const coincideTexto =
+      usuario.nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase())||
+      usuario.apellido.toLowerCase().includes(this.textoBusqueda.toLowerCase())||
+      usuario.correo.toLowerCase().includes(this.textoBusqueda.toLowerCase());
+
+      const coincideRol=
+      this.filtroRol==''|| usuario.rol==this.filtroRol;
+
+      return coincideTexto && coincideRol;
+    });
   }
 }

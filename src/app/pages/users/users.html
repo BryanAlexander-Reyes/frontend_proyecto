@@ -55,11 +55,26 @@
       <section class="table-panel">
         <div class="panel-title">
           <span> 📓 </span>
-          <h2>Usuario Registrado</h2>
+          <h2>Usuario Registrados</h2>
           <p class="table-info">
             Total de usuarios: <strong> {{ obtenerTotalUsuarios() }} </strong>
           </p>
         </div>
+        <div class="toolbar">
+          <input type="text"
+          placeholder="Buscar usuario..."
+          [(ngModel)]="textoBusqueda"
+          (input)="buscarUsuarios()">
+          <select [(ngModel)]="filtroRol" (change)="buscarUsuarios()">
+            <option value="">Todos los roles</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Instructor">Instructor</option>
+            <option value="Aprendiz">Aprendiz</option>
+          </select>
+        </div>
+        <p class="table-info">
+          Usuarios encontrados: <strong>{{usuariosFiltrados.length}}</strong>
+        </p>
         <div class="table-responsive">
           <table>
             <thead>
@@ -70,10 +85,11 @@
                 <th>Correo</th>
                 <th>Rol</th>
                 <th>Estado</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let usuario of usuarios">
+              <tr *ngFor="let usuario of usuariosFiltrados">
                 <td>{{ usuario.id }}</td>
                 <td>{{ usuario.nombre }}</td>
                 <td>{{ usuario.apellido }}</td>
@@ -87,6 +103,10 @@
                   >
                     {{ usuario.estado ? 'Activo' : 'Inactivo' }}
                   </span>
+                </td>
+                <td>
+                  <button class="btn-edit"(click)="editarUsuario(usuario)">✏️</button>
+                  <button class="btn-delete" (click)="eliminarUsuario(usuario.id)">☠️</button>
                 </td>
               </tr>
             </tbody>
