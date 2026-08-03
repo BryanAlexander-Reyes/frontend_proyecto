@@ -39,6 +39,16 @@ export class UsersComponent implements OnInit {
   // ID EN EDICION
   idEditar:number | null=null;
 
+  // PAGINA ACTUAL
+  paginaActual: number=1;
+  // cantidad de pagina
+  registroPorPagina:number=10;
+
+  // lista que realmente muestra la tabla paginada
+  uasuariosPaginados:Usuario[]=[];
+  
+
+
   // mensajes de errores
   mensajes:string=''
   tipoMensaje:'success'  | 'error'  |  ''='';
@@ -86,13 +96,13 @@ export class UsersComponent implements OnInit {
 
   // otra manera de validar 
   validadorCorreo(correo:string): boolean{
-    const expresion=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[a-zA]{2,}$/;
+    const expresion=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return expresion.test(correo)
   }
 
 
-  correoExiste(correo:string): boolean{
-    return this.usuarios.some(usuario=>usuario.correo.toLowerCase()===correo.toLowerCase())
+  correoExiste(correo:string, idUsuario: number | null): boolean{
+    return this.usuarios.some(usuario=>usuario.correo.toLowerCase()===correo.toLowerCase()&&usuario.id!== idUsuario);
   }
   limpiarFormulario():void{
 
@@ -111,6 +121,28 @@ export class UsersComponent implements OnInit {
 
   registrarUsuario():void{
 
+    // validacion de campos
+    if(this.nombre.trim()===''|| this.apellido.trim()===''||this.correo.trim()===''){
+      this.tipoMensaje='error';
+      this.mensajes='Todos los campos son obligatorios';
+      return
+    }
+
+    // validacion correo
+    if(!this.validadorCorreo(this.correo)){
+      this.tipoMensaje='error';
+      this.mensajes='El formato del correo es incorrecto';
+      return
+    }
+
+    // validar duplicados
+    if(this.correoExiste(this.correo, this.idEditar)){
+      this.tipoMensaje='error';
+      this.mensajes='El correo ya se encuentra registrado.';
+      return
+    }
+    
+
     
     if(this.idEditar!=null){
       const usuario=this.usuarios.find(u=>u.id==this.idEditar);
@@ -127,28 +159,6 @@ export class UsersComponent implements OnInit {
       this.limpiarFormulario();
       return
     }
-
-    // validacion de campos
-    if(this.nombre.trim()===''|| this.apellido.trim()===''||this.correo.trim()===''){
-      this.tipoMensaje='error';
-      this.mensajes='Todos los campos son obligatorios';
-      return
-    }
-
-    // validacion correo
-    if(!this.validadorCorreo(this.correo)){
-      this.tipoMensaje='error';
-      this.mensajes='El formato del correo es incorrecto';
-      return
-    }
-
-    // validar duplicados
-    if(this.correoExiste(this.correo)){
-      this.tipoMensaje='error';
-      this.mensajes='El correo ya se encuentra registrado.';
-      return
-    }
-    
 
 
     // se construye un nuevo objeto usuario utilizando la informacion ingresada en el formulario
@@ -210,4 +220,14 @@ export class UsersComponent implements OnInit {
     this.usuarios=this.usuarios.filter(usuario=>usuario.id!=id);
     this.buscarUsuarios();
   }
+
+  actualiazarPaginacion():void{
+    const inicio= (this.paginaActual-1)*this.registroPorPagina;
+    const fin= inicio+this.registroPorPagina;
+    this.uasuariosPaginados=this.usuariosFiltrados.slice(inicio, fin)
+  }
+  obtenerTotalPaginas(): number{
+    return Math.ceil(this.usuariosFiltrados.length/this.registroPorPagina)
+  }
 }
+
