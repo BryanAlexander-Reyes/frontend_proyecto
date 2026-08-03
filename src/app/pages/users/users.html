@@ -79,12 +79,12 @@
           <table>
             <thead>
               <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Estado</th>
+                <th class="sortable" (click)="ordenar('id')">ID {{obtenerIconoOrden('id')}}</th>
+                <th class="sortable" (click)="ordenar('nombre')">Nombre {{obtenerIconoOrden('nombre')}}</th>
+                <th class="sortable" (click)="ordenar('apellido')">Apellido {{obtenerIconoOrden('apellido')}} </th>
+                <th class="sortable" (click)="ordenar('correo')" >Correo {{obtenerIconoOrden('correo')}} </th>
+                <th class="sortable" (click)="ordenar('rol')">Rol {{obtenerIconoOrden('rol')}} </th>
+                <th class="sortable "(click)="ordenar('estado')">Estado {{obtenerIconoOrden('estado')}}</th>
                 <th>Acciones</th>
               </tr>
             </thead>

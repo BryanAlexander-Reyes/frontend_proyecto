@@ -46,6 +46,12 @@ export class UsersComponent implements OnInit {
 
   // lista que realmente muestra la tabla paginada
   uasuariosPaginados:Usuario[]=[];
+  // columna actualmente ordenada
+  columnaOrden: string='';
+  // DIRECCION DE ORDEN
+  // TRUE -> ASCENDENTE
+  // FALSE-> DESCENDETE
+  ordenAscendente: boolean=true;
   
 
 
@@ -201,6 +207,10 @@ export class UsersComponent implements OnInit {
       const coincideRol=
       this.filtroRol==''|| usuario.rol==this.filtroRol;
       this.paginaActual=1
+      if(this.columnaOrden==''){
+        this.ordenar(this.columnaOrden);
+        
+      }
       this.actualiazarPaginacion();
       return coincideTexto && coincideRol;
     });
@@ -250,6 +260,64 @@ export class UsersComponent implements OnInit {
     return Array.from({
       length:this.obtenerTotalPaginas()
     },(_,indice)=>indice+1)
+  }
+
+  ordenar(columna:string):void{
+    if(this.columnaOrden===columna){
+      this.ordenAscendente=!this.ordenAscendente;
+    }else{
+      this.columnaOrden=columna;
+      this.ordenAscendente=true;
+    }
+
+    this.usuariosFiltrados.sort((a:Usuario,b:Usuario)=>{
+      let valorA:any;
+      let valorB:any;
+      switch(columna){
+        case 'id':
+          valorA= a.id;
+          valorB= b.id;
+          break;
+        case 'nombre':
+          valorA=a.nombre.toLowerCase();
+          valorB=b.nombre.toLowerCase();
+          break;
+        case 'apellido':
+          valorA=a.apellido.toLowerCase();
+          valorB=b.apellido.toLowerCase();
+          break;
+        case 'correo':
+          valorA=a.correo.toLowerCase();
+          valorB=b.correo.toLowerCase();
+          break;
+        case 'rol':
+          valorA=a.rol.toLowerCase();
+          valorB=b.rol.toLowerCase();
+          break;
+        case 'estado':
+          valorA=a.estado ? 1:0;
+          valorB=b.estado ? 1:0;
+          break;
+        default:
+          return 0;
+      }
+      if(valorA<valorB){
+        return this.ordenAscendente? -1:1;
+      }
+      if(valorA>valorB){
+        return this.ordenAscendente ? 1:-1;
+      }
+      return 0;
+    });
+    this.actualiazarPaginacion()
+  }
+  
+  obtenerIconoOrden(columna:string):string{
+    if(this.columnaOrden!== columna){
+      return '⇅'
+    }
+    return this.ordenAscendente? '⇧': '⇩';
+
   }
 }
 

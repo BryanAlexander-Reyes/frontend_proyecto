@@ -332,6 +332,19 @@ tbody tr:hover {
     font-size: 14px;
 }
 
+.sortable{
+    cursor:pointer;
+    user-select: none;
+    transition: .3s;
+}
+sortable:hover{
+    background: #1d4ed8;
+}
+
+.sortable:active{
+    transform:scale(.98s)
+}
+
 @keyframes fadeIn {
     from{
         opacity: 0;
