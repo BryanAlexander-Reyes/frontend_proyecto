@@ -292,6 +292,46 @@ tbody tr:hover {
     background: #dc2626;
 }
 
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top:25px;
+    flex-wrap: wrap;
+}
+
+.pagination button{
+    min-width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    transition: .3s;
+}
+
+.pagination button:hover{
+    background: #eff6ff;
+}
+
+.pagination button:disabled{
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.active-page{
+    background: #2563eb !important;
+    color: white;
+}
+
+.pagination-info{
+    text-align: right;
+    margin-top: 20px;  
+    color:#64478b;
+    font-size: 14px;
+}
+
 @keyframes fadeIn {
     from{
         opacity: 0;

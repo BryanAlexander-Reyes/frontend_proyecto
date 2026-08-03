@@ -63,6 +63,8 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.cargarDatosIniciales();
     this.usuariosFiltrados=[...this.usuarios]
+    this.actualiazarPaginacion();
+    
   }
 
   cargarDatosIniciales():void{
@@ -198,7 +200,8 @@ export class UsersComponent implements OnInit {
 
       const coincideRol=
       this.filtroRol==''|| usuario.rol==this.filtroRol;
-
+      this.paginaActual=1
+      this.actualiazarPaginacion();
       return coincideTexto && coincideRol;
     });
   }
@@ -228,6 +231,25 @@ export class UsersComponent implements OnInit {
   }
   obtenerTotalPaginas(): number{
     return Math.ceil(this.usuariosFiltrados.length/this.registroPorPagina)
+  }
+  cambiarPagina(pagina:number):void{
+    if(pagina<1 || pagina>this.obtenerTotalPaginas()){
+      return
+    }
+    this.paginaActual=pagina;
+    this.actualiazarPaginacion()
+  }
+  siguientePagina():void{
+    this.cambiarPagina(this.paginaActual+1)
+  }
+  anteriorPagina():void{
+    this.cambiarPagina(this.paginaActual-1)
+  }
+
+  obtenerPaginas():number[]{
+    return Array.from({
+      length:this.obtenerTotalPaginas()
+    },(_,indice)=>indice+1)
   }
 }
 
