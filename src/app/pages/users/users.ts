@@ -10,6 +10,9 @@ interface Usuario{
   rol:string;
   estado:boolean;
 }
+
+const STORAGE_KEY='usuariosSistema';
+
 @Component({
   selector: 'app-users',
   imports: [FormsModule, NgForOf, NgIf],
@@ -69,10 +72,13 @@ export class UsersComponent implements OnInit {
   // Usuario a eliminar   
   usuarioSeleccionado: Usuario | null = null;
 
+
+  
+
+
   // linea que utiliza metodo para iniciar desde el principio
   ngOnInit(): void {
-    this.cargarDatosIniciales();
-    this.usuariosFiltrados=[...this.usuarios]
+    this.cargarUsuarios();
     this.actualiazarPaginacion();
     
   }
@@ -166,6 +172,7 @@ export class UsersComponent implements OnInit {
         usuario.estado=this.estado;
       }
       this.idEditar=null;
+      this.guardarUsuario();
       this.buscarUsuarios();
       alert('Usuario Actualizado')
       this.limpiarFormulario();
@@ -184,7 +191,9 @@ export class UsersComponent implements OnInit {
     };
     // agrega el nuevo objeto al arreglo
     this.usuarios.push(nuevoUsuario);
+    this.guardarUsuario();
     this.buscarUsuarios();
+    this.actualiazarPaginacion();
     this.tipoMensaje='success';
     this.mensajes='Usuario registrados correctamente.';
 
@@ -331,13 +340,41 @@ export class UsersComponent implements OnInit {
     }
     this.usuarios=this.usuarios.filter(usuario=>usuario.id!==this.usuarioSeleccionado!.id);
     // Actualiza busqueda, filtros, el ordenamiento y la paginacion
+    this.guardarUsuario();
     this.buscarUsuarios();
+    this.actualiazarPaginacion();
     // Mensajes de exito
     this.tipoMensaje='success'
     this.mensajes='usuario eliminado correctamente';
 
     // cerrar modal
     this.cerrarModal();
+  }
+
+  guardarUsuario():void{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.usuarios));
+    
+  }
+
+  cargarUsuarios():void{
+    const datos=localStorage.getItem(STORAGE_KEY)
+    if(datos){
+      this.usuarios=JSON.parse(datos);
+    }else{
+      this.cargarDatosIniciales();
+      this.guardarUsuario();
+    }
+    this.usuariosFiltrados=[...this.usuarios];
+  }
+
+  reiniciarDatos():void{
+    const respuesta= confirm ('¿Desea restaurar los usuarios iniciales?')
+    if(!respuesta){
+      return
+    }
+    localStorage.removeItem(STORAGE_KEY);
+    this.cargarUsuarios();
+    this.buscarUsuarios();
   }
 }
 

@@ -362,6 +362,11 @@ sortable:hover{
     box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
     animation:modalShow .3s ease;
 }
+.modal-header{
+    background: #0f172a;
+    color: white;
+    padding: 20px;
+}
 .modal-body{
     padding:30px;
 
@@ -396,6 +401,10 @@ sortable:hover{
 .btn-cancel{
     background: #cbd5e1;
     color: #0f172a;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 .btn-cancel:hover{
     background: #94a3b8;
@@ -403,10 +412,33 @@ sortable:hover{
 .btn-danger{
     background: #dc2626;
     color:white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .btn-danger:hover{
     background: #b91c1c;
+}
+
+@keyframes modalShow {
+    from{
+        transform: translateY(-20) scale(.95);
+        opacity:0;
+    }
+    to{
+        transform: translateY(0) scale(1); 
+        opacity:1;
+    }
+}
+@keyframes fadeBackground{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 
 @keyframes fadeIn {

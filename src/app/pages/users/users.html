@@ -51,6 +51,7 @@
             {{ idEditar == null ? 'registro' : 'Actualizar' }}
           </button>
           <button class="btn-secundary" (click)="limpiarFormulario()">Limpiar</button>
+          <button class="btn-secundary" (click)="reiniciarDatos()">Restaurar Datos</button>
         </div>
       </section>
 
@@ -157,20 +158,21 @@
     </div>
     <div class="modal-body">
       <p>¿Desea eliminar el siguiente usuario?</p>
-    </div>
-    <div class="user-info-model">
-      <strong>
-        {{ usuarioSeleccionado?.nombre }}
-        {{ usuarioSeleccionado?.apellido }}
-      </strong>
-      <span>
-        {{ usuarioSeleccionado?.correo }}
-      </span>
-    </div>
-    <p class="warning">Esta accion no se puede deshacer</p>
-    <div class="model-footer">
-      <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
-      <button class="btn-danger" (click)="confirmarEliminar()">Eliminar</button>
+
+      <div class="user-info-modal">
+        <strong>
+          {{ usuarioSeleccionado?.nombre }}
+          {{ usuarioSeleccionado?.apellido }}
+        </strong>
+        <span>
+          {{ usuarioSeleccionado?.correo }}
+        </span>
+      </div>
+      <p class="warning">Esta accion no se puede deshacer</p>
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+        <button class="btn-danger" (click)="confirmarEliminar()">Eliminar</button>
+      </div>
     </div>
   </div>
 </div>
