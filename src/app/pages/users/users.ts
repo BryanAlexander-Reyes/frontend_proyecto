@@ -53,6 +53,7 @@ export class UsersComponent implements OnInit {
   // FALSE-> DESCENDETE
   ordenAscendente: boolean=true;
   
+  
 
 
   // mensajes de errores
@@ -63,7 +64,10 @@ export class UsersComponent implements OnInit {
 
   modoEdicion: boolean=false;
 
-  
+  // mostrar o no mostrar el modal
+  mostrarModalEliminar:boolean = false;
+  // Usuario a eliminar   
+  usuarioSeleccionado: Usuario | null = null;
 
   // linea que utiliza metodo para iniciar desde el principio
   ngOnInit(): void {
@@ -225,14 +229,6 @@ export class UsersComponent implements OnInit {
     this.estado=usuario.estado;
   }
 
-  eliminarUsuario(id:number):void{
-    const respuesta=confirm('¿Desea eliminar este usuario?')
-    if(!respuesta){
-      return
-    }
-    this.usuarios=this.usuarios.filter(usuario=>usuario.id!=id);
-    this.buscarUsuarios();
-  }
 
   actualiazarPaginacion():void{
     const inicio= (this.paginaActual-1)*this.registroPorPagina;
@@ -317,7 +313,31 @@ export class UsersComponent implements OnInit {
       return '⇅'
     }
     return this.ordenAscendente? '⇧': '⇩';
+  }
 
+  abrirModalEliminar(usuario:Usuario):void{
+    this.usuarioSeleccionado=usuario;
+    this.mostrarModalEliminar=true
+  }
+
+  cerrarModal():void{
+    this.mostrarModalEliminar=false;
+    this.usuarioSeleccionado=null;
+  }
+
+  confirmarEliminar():void{
+    if(!this.usuarioSeleccionado){
+      return;
+    }
+    this.usuarios=this.usuarios.filter(usuario=>usuario.id!==this.usuarioSeleccionado!.id);
+    // Actualiza busqueda, filtros, el ordenamiento y la paginacion
+    this.buscarUsuarios();
+    // Mensajes de exito
+    this.tipoMensaje='success'
+    this.mensajes='usuario eliminado correctamente';
+
+    // cerrar modal
+    this.cerrarModal();
   }
 }
 

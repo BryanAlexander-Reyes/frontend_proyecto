@@ -13,7 +13,7 @@
       <section class="form-panel">
         <div class="panel-title">
           <span> ➕ </span>
-          <h2>{{idEditar==null?'Registrar Usuario':'Actualizar usuario'}}</h2>
+          <h2>{{ idEditar == null ? 'Registrar Usuario' : 'Actualizar usuario' }}</h2>
         </div>
         <div
           *ngIf="mensajes"
@@ -47,7 +47,9 @@
           <label> <input type="checkbox" [(ngModel)]="estado" /> Usuario activo </label>
         </div>
         <div class="buttons">
-          <button class="btn-primary" (click)="registrarUsuario()">{{idEditar==null?'registro':'Actualizar'}}</button>
+          <button class="btn-primary" (click)="registrarUsuario()">
+            {{ idEditar == null ? 'registro' : 'Actualizar' }}
+          </button>
           <button class="btn-secundary" (click)="limpiarFormulario()">Limpiar</button>
         </div>
       </section>
@@ -61,10 +63,12 @@
           </p>
         </div>
         <div class="toolbar">
-          <input type="text"
-          placeholder="Buscar usuario..."
-          [(ngModel)]="textoBusqueda"
-          (input)="buscarUsuarios()">
+          <input
+            type="text"
+            placeholder="Buscar usuario..."
+            [(ngModel)]="textoBusqueda"
+            (input)="buscarUsuarios()"
+          />
           <select [(ngModel)]="filtroRol" (change)="buscarUsuarios()">
             <option value="">Todos los roles</option>
             <option value="Administrador">Administrador</option>
@@ -73,18 +77,28 @@
           </select>
         </div>
         <p class="table-info">
-          Usuarios encontrados: <strong>{{usuariosFiltrados.length}}</strong>
+          Usuarios encontrados: <strong>{{ usuariosFiltrados.length }}</strong>
         </p>
         <div class="table-responsive">
           <table>
             <thead>
               <tr>
-                <th class="sortable" (click)="ordenar('id')">ID {{obtenerIconoOrden('id')}}</th>
-                <th class="sortable" (click)="ordenar('nombre')">Nombre {{obtenerIconoOrden('nombre')}}</th>
-                <th class="sortable" (click)="ordenar('apellido')">Apellido {{obtenerIconoOrden('apellido')}} </th>
-                <th class="sortable" (click)="ordenar('correo')" >Correo {{obtenerIconoOrden('correo')}} </th>
-                <th class="sortable" (click)="ordenar('rol')">Rol {{obtenerIconoOrden('rol')}} </th>
-                <th class="sortable "(click)="ordenar('estado')">Estado {{obtenerIconoOrden('estado')}}</th>
+                <th class="sortable" (click)="ordenar('id')">ID {{ obtenerIconoOrden('id') }}</th>
+                <th class="sortable" (click)="ordenar('nombre')">
+                  Nombre {{ obtenerIconoOrden('nombre') }}
+                </th>
+                <th class="sortable" (click)="ordenar('apellido')">
+                  Apellido {{ obtenerIconoOrden('apellido') }}
+                </th>
+                <th class="sortable" (click)="ordenar('correo')">
+                  Correo {{ obtenerIconoOrden('correo') }}
+                </th>
+                <th class="sortable" (click)="ordenar('rol')">
+                  Rol {{ obtenerIconoOrden('rol') }}
+                </th>
+                <th class="sortable" (click)="ordenar('estado')">
+                  Estado {{ obtenerIconoOrden('estado') }}
+                </th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -105,27 +119,58 @@
                   </span>
                 </td>
                 <td>
-                  <button class="btn-edit"(click)="editarUsuario(usuario)">✏️</button>
-                  <button class="btn-delete" (click)="eliminarUsuario(usuario.id)">☠️</button>
+                  <button class="btn-edit" (click)="editarUsuario(usuario)">✏️</button>
+                  <button class="btn-delete" (click)="abrirModalEliminar(usuario)">☠️</button>
                 </td>
               </tr>
             </tbody>
           </table>
           <div class="pagination-info">
-            Mostrando {{uasuariosPaginados.length}} de {{usuariosFiltrados.length}} Usuarios
+            Mostrando {{ uasuariosPaginados.length }} de {{ usuariosFiltrados.length }} Usuarios
           </div>
           <div class="pagination">
-            <button (click)="anteriorPagina()"[disabled]="paginaActual===1">⬅️ Anterior</button>
-            <button *ngFor="let pagina of obtenerPaginas()" (click)="cambiarPagina(pagina)"
-            [class.active-page]="pagina==paginaActual">
-            {{pagina}}
-          </button>
-          <button (click)="siguientePagina()" [disabled]="paginaActual==obtenerTotalPaginas()">Siguiente ➡️</button>
+            <button (click)="anteriorPagina()" [disabled]="paginaActual === 1">⬅️ Anterior</button>
+            <button
+              *ngFor="let pagina of obtenerPaginas()"
+              (click)="cambiarPagina(pagina)"
+              [class.active-page]="pagina == paginaActual"
+            >
+              {{ pagina }}
+            </button>
+            <button (click)="siguientePagina()" [disabled]="paginaActual == obtenerTotalPaginas()">
+              Siguiente ➡️
+            </button>
           </div>
-          
         </div>
       </section>
     </div>
     <footer class="page-footer">Sistema ADSO - Panel de Administración</footer>
+  </div>
+</div>
+
+<!-- modal eliminar usuario seccion donde aparesca despues  -->
+
+<div class="modal-overlay" *ngIf="mostrarModalEliminar">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Confirmar Eliminacion</h2>
+    </div>
+    <div class="modal-body">
+      <p>¿Desea eliminar el siguiente usuario?</p>
+    </div>
+    <div class="user-info-model">
+      <strong>
+        {{ usuarioSeleccionado?.nombre }}
+        {{ usuarioSeleccionado?.apellido }}
+      </strong>
+      <span>
+        {{ usuarioSeleccionado?.correo }}
+      </span>
+    </div>
+    <p class="warning">Esta accion no se puede deshacer</p>
+    <div class="model-footer">
+      <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+      <button class="btn-danger" (click)="confirmarEliminar()">Eliminar</button>
+    </div>
   </div>
 </div>
