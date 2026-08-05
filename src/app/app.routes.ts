@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login'
 import { RegisterComponent } from './pages/register/register'
 import { DashboardComponent } from './pages/dashboard/dashboard';
 import { UsersComponent } from './pages/users/users';
+import { LayoutComponent } from './layout/layout/layout';
 // Definición de rutras de la aplicación 
 
 
@@ -36,4 +37,8 @@ export const routes: Routes = [
         path:'users',
         component: UsersComponent
     },
+    {
+        path:'principal',
+        component: LayoutComponent
+    }
 ];
