@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnDestroy, OnInit, signal, } from '@angular/core';
+
 
 @Component({
   selector: 'app-header',
-  imports: [DatePipe],
+  imports: [],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -13,8 +13,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
   descripcionSistema:string='Plataforma academica para la gestion institucional';
   usuario: string = 'Administrador';
   rol: string='Admin del sistema';
-  fechaActual:string='';
-  horaActual:string='';
+  fechaActual=signal('');
+  horaActual=signal('');
 
   private intervalo:any;
 
@@ -30,22 +30,19 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   actualizarFechaHora():void{
     const ahora = new Date();
-    this.fechaActual=ahora.toLocaleDateString(
-      'es.CO',{
+    this.fechaActual.set (ahora.toLocaleDateString(
+      'es-CO',{
         weekday:'long',
         day:'2-digit',
         month:'long',
         year:'numeric'
       }
-    );
-    this.horaActual=ahora.toLocaleTimeString(
-      'es-Co',{
-        hour:'2-digit',
-        minute:'2-digit',
-        second:'2-digit',
+    ));
+    this.horaActual.set(ahora.toLocaleTimeString(
+      'es-CO',{
         hour12: false
       }
-    );
+    ));
   }
   cerrarSesion():void{
     alert('Aqui se cerro sesión')

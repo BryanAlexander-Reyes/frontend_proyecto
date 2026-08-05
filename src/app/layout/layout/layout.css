@@ -12,7 +12,8 @@
     background: #f1f5f9;
 }
 .layout-header{
-    height: 80px;
+    height: 130px;
+
     flex-shrink: 0;
 }
 
