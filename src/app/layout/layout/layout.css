@@ -41,10 +41,11 @@
 }
 
 .layout-footer{
-    height: 60px;
+    height: 100%;
     background: #0f172a;
     color:white;
     display: flex;
     justify-content: center;
     align-content: center;
+    width: 100%;
 }
