@@ -31,7 +31,7 @@ export class LoginComponent {
       nombre:'Fabian Instructor',
       correo:'instructor@sena.edu.co',
       password:'123456',
-      rol:'instructor'
+      rol:'Instructor'
     },
     {
       nombre:'Pasta Aprendiz',
@@ -49,8 +49,8 @@ export class LoginComponent {
 
 // contraseña quemada para realizar la prueba
 
-  private readonly password_correcta: string= "123456";
-  private readonly email_correcto: string="bryanreyes47k@gmail.com"
+  // private readonly password_correcta: string= "123456";
+  // private readonly email_correcto: string="bryanreyes47k@gmail.com"
   // metodo para login que sera ejecutado al precionar el boton
   login (): void{
     
@@ -65,10 +65,10 @@ export class LoginComponent {
       alert('Contraseña incorrecta')
       return;
     }
-    localStorage.setItem('usuarioLogueado', 'true');
-    localStorage.setItem('Rol',usuario.rol);
-    localStorage.setItem('Correo',usuario.correo);
-    localStorage.setItem('Nombre',usuario.nombre);
+    localStorage.setItem('usuarioLogeado', 'true');
+    localStorage.setItem('rol',usuario.rol);
+    localStorage.setItem('correo',usuario.correo);
+    localStorage.setItem('nombre',usuario.nombre);
 
     alert('Bienvenido al sistema '+ usuario.nombre + '\nRol: ' + usuario.rol);
     this.router.navigate(['/dashboard'])

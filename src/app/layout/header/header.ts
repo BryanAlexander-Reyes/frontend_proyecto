@@ -12,14 +12,16 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   nombraSistema:string= 'Sistema ADSO';
   descripcionSistema:string='Plataforma academica para la gestion institucional';
-  usuario: string = 'Administrador';
-  rol: string='Admin del sistema';
+  usuario: string = '';
+  rol: string='';
   fechaActual=signal('');
   horaActual=signal('');
 
   private intervalo:any;
 
   ngOnInit(): void {
+    this.usuario= localStorage.getItem('nombre')??'';
+    this.rol=localStorage.getItem('rol')??'';
     this.actualizarFechaHora();
     this.intervalo=setInterval(()=>{
       this.actualizarFechaHora();
@@ -46,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     ));
   }
   cerrarSesion():void{
-    localStorage.removeItem('usuarioLogueado');
+    localStorage.removeItem('usuarioLogeado');
     this.router.navigate(['/login'])
     alert('Aqui se cerro sesión')
   }
