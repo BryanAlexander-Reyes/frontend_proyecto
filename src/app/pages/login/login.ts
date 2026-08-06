@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from "@angular/router";
+import { AuthService } from '../../services/auth';
 
-interface UsuarioSistemas{
-  nombre:string;
-  correo:string;
-  password:string;
-  rol:string;
-}
 
 @Component({
   selector: 'app-login',
@@ -18,28 +13,9 @@ interface UsuarioSistemas{
 export class LoginComponent {
 
   // constructor para usar las rutas internas
-  constructor(private router:Router){}
+  constructor(private router:Router, private authService:AuthService){}
 
-  usuariosSistemas:UsuarioSistemas[]=[
-    {
-      nombre:'Administrador',
-      correo:'admin@sena.edu.co',
-      password:'123456',
-      rol:'Administrador'
-    },
-    {
-      nombre:'Fabian Instructor',
-      correo:'instructor@sena.edu.co',
-      password:'123456',
-      rol:'Instructor'
-    },
-    {
-      nombre:'Pasta Aprendiz',
-      correo:'pasta@sena.edu.co',
-      password:'123456',
-      rol:'Aprendiz'
-    }
-  ]
+  
 
   // CREAR VARIABLE PARA ALMACENAR CORREO
   email: string ='';
@@ -53,24 +29,16 @@ export class LoginComponent {
   // private readonly email_correcto: string="bryanreyes47k@gmail.com"
   // metodo para login que sera ejecutado al precionar el boton
   login (): void{
-    
-    const usuario=this.usuariosSistemas.find(
-      u=>u.correo===this.email
-    );
-    if(!usuario){
-      alert ('El correo no existe')
-      return;
-    }
-    if(usuario.password!==this.password){
-      alert('Contraseña incorrecta')
-      return;
-    }
-    localStorage.setItem('usuarioLogeado', 'true');
-    localStorage.setItem('rol',usuario.rol);
-    localStorage.setItem('correo',usuario.correo);
-    localStorage.setItem('nombre',usuario.nombre);
 
-    alert('Bienvenido al sistema '+ usuario.nombre + '\nRol: ' + usuario.rol);
+    const autenticado=this.authService.iniciarSesion(this.email, this.password);
+    if(!autenticado){
+      alert ('Correo o contraseña incorrecta')
+      return;
+    }
+    const usuario=this.authService.obtenerUsuario();
+    alert (`Bienvenido al sistema ${usuario?.nombre}\nrol: ${usuario?.rol}`)
+
+
     this.router.navigate(['/dashboard'])
   }
   goToRegister():void{
