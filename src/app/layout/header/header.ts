@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     ));
   }
   cerrarSesion():void{
-    localStorage.removeItem('usuarioLogeado');
+    localStorage.removeItem('usuarioLogueado');
     this.router.navigate(['/login'])
     alert('Aqui se cerro sesión')
   }
