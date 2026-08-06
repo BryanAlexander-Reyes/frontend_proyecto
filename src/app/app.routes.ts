@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RedirectCommand, Routes } from '@angular/router';
 
 
 // importacion del componente login
@@ -14,31 +14,34 @@ import { LayoutComponent } from './layout/layout/layout';
 export const routes: Routes = [
     // ruta principal de la app
     {
-        path:'',
-        redirectTo:'login',
-        pathMatch:'full'
+        path: '',
+        component: LayoutComponent,
+        children: [{
+            path: '',
+            redirectTo: 'dashboard',
+            pathMatch: 'full',
+        },
+        {
+            path: 'dashboard',
+            component: DashboardComponent
+        },
+        {
+            path: 'users',
+            component: UsersComponent
+        }
+      ]
     },
+
+    // Ruta del componente login
+
     {
-        path:'login',
-        component: LoginComponent,
+        path: 'login',
+        component: LoginComponent
     },
-    // Ruta de componente register
+
+    // Ruta del componente register
     {
-        path:'register',
-        component:RegisterComponent
-    },
-    // Ruta del componente de dashboard
-    {
-        path:'dashboard',
-        component: DashboardComponent
-    },
-    // ruta de componente de usuario
-    {
-        path:'users',
-        component: UsersComponent
-    },
-    {
-        path:'principal',
-        component: LayoutComponent
+        path: 'register',
+        component: RegisterComponent
     }
 ];

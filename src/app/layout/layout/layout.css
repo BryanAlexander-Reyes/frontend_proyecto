@@ -1,51 +1,48 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
 }
 
-.layout-container{
+.layout-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     background: #f1f5f9;
+    overflow: hidden;
 }
-.layout-header{
-    height: 130px;
 
+.layout-header {
+    height: 120px;
     flex-shrink: 0;
 }
 
-.layout-main{
-    flex:1;
-    display:flex;
-
-}
-.layout-sidebar{
-    width: 260px;
-    background: #1e293b;
-    color:white;
+.layout-main {
+    flex: 1;
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    
-    align-items: center;
-    font-size: 22px;
 }
 
-.layout-content{
-    flex:1;
+.layout-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.layout-content {
+    flex: 1;
     padding: 30px;
     background: #f8fafc;
     overflow: auto;
+    overflow-x: hidden;
 }
 
-.layout-footer{
-    height: 100%;
+.layout-footer {
+    height: 100px;
+    width: 100%;
     background: #0f172a;
-    color:white;
     display: flex;
     justify-content: center;
-    align-content: center;
-    width: 100%;
+    align-items: center;
 }
