@@ -35,6 +35,7 @@ export class LoginComponent {
       if(this.password ===this.password_correcta){
         console.log('Password:', this.password);
         alert('El coreo y la contraseña es correcta. \n\n' + 'el correo es:' + this.email +'la contraseña que fue ingresada es:'+ this.password);
+        localStorage.setItem('usuarioLogeado', 'true');
         this.router.navigate(['/dashboard']);
       }else{
         alert('La contraseña  no coincide. \n\n'+'La contraseña ingresada fue:'+this.password)

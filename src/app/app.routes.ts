@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/register/register'
 import { DashboardComponent } from './pages/dashboard/dashboard';
 import { UsersComponent } from './pages/users/users';
 import { LayoutComponent } from './layout/layout/layout';
+import { authGuard } from './guards/auth-guard';
 // Definición de rutras de la aplicación 
 
 
@@ -16,6 +17,9 @@ export const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate:[
+            authGuard
+        ],
         children: [{
             path: '',
             redirectTo: 'dashboard',

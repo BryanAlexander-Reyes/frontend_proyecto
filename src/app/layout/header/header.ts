@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, signal, } from '@angular/core';
-
+import { Component, OnDestroy, OnInit, signal,  } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +8,7 @@ import { Component, OnDestroy, OnInit, signal, } from '@angular/core';
   styleUrl: './header.css',
 })
 export class HeaderComponent implements OnInit, OnDestroy{
+  constructor (private router:Router){}
 
   nombraSistema:string= 'Sistema ADSO';
   descripcionSistema:string='Plataforma academica para la gestion institucional';
@@ -45,6 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
     ));
   }
   cerrarSesion():void{
+    localStorage.removeItem('usuarioLogeado');
+    this.router.navigate(['/login'])
     alert('Aqui se cerro sesión')
   }
 }
