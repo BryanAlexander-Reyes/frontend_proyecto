@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
 interface MenuItem{
   icono:string;
@@ -15,9 +16,9 @@ interface MenuItem{
   styleUrl: './sidebar.css'
 })
 export class SidebarComponent {
-  constructor (){
+  constructor (private authService:AuthService){
     
-    this.rolUsuario=localStorage.getItem('rol')??'Aprendiz';
+    this.rolUsuario=this.authService.obtnerRol();
     this.cargarMenu();
   }
 
