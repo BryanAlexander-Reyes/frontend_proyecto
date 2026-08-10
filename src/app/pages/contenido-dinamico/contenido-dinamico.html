@@ -1,1 +1,42 @@
-<p>contenido-dinamico works!</p>
+<div class="contenido-container">
+    <!-- Sección de cards -->
+    <section class="cards-section">
+        <div class="section-header">
+            <h1> Contenido destacado </h1>
+            <p> Explora las diferentes opciones disponibles </p>
+        </div>
+        <!-- Carrusel -->
+        <div class="carousel-container">
+            <div class="cards-container">
+                <!-- Cards dinámicas -->
+                <article class="card" *ngFor="let card of cards">
+                    <!-- Imagen -->
+                    <div class="card-image">
+                        <img [src]="card.imagen" [alt]="card.texto">
+                    </div>
+                    <div class="card-content">
+                        <p> {{card.texto}} </p>
+                        <button (click)="ejecutarAccion(card)"> {{card.boton}} </button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- Subsecciones -->
+    <section class="subsections-section">
+        <div class="section-header">
+            <h2> Información </h2>
+            <p> Conoce más acerca de nuestra plataforma </p>
+        </div>
+        <!-- Sección dinámica -->
+        <article class="subsection" *ngFor="let subSeccion of subSecciones">
+            <div class="subsection-image">
+                <img [src]="subSeccion.imagen" [alt]="subSeccion.titulo">
+            </div>
+            <div class="subsection-content">
+                <h3> {{subSeccion.titulo}} </h3>
+                <p> {{subSeccion.texto}} </p>
+            </div>
+        </article>
+    </section>
+</div>

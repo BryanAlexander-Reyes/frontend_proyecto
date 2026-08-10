@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 interface Card{
   imagen:string;
@@ -13,7 +14,7 @@ interface subSeccion{
 
 @Component({
   selector: 'app-contenido-dinamico',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './contenido-dinamico.html',
   styleUrl: './contenido-dinamico.css',
 })
