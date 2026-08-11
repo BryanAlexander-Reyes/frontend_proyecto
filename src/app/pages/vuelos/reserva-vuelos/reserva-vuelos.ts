@@ -11,6 +11,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // el dialog es como un alert casi nunca se va a utilizar
 import { MatDialog } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from "../../../../../node_modules/@angular/common/types/_common_module-chunk";
+import { DecimalPipe } from '../../../../../node_modules/@angular/common/types/_common_module-chunk';
 
 interface  Vuelo{
   id:number;
@@ -34,12 +37,32 @@ interface  Vuelo{
     MatExpansionModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-
-  ],
+    FormsModule,
+    NgIf,
+    DecimalPipe,
+],
   templateUrl: './reserva-vuelos.html',
   styleUrl: './reserva-vuelos.css',
 })
 export class ReservaVuelosComponent {
+
+  origen:string='';
+  destino:string='';
+  fechaSalida: Date | null=null;
+  pasajeros:number=1;
+
+  // nuevo
+  cargando:boolean=false;
+  progreso:number=0;
+
+  columnas: string[]=[
+    'origen',
+    'destino',
+    'hora',
+    'duracion',
+    'precio',
+    'accion'
+  ]
   vuelos:Vuelo[]=[
     {
       id:1,
@@ -73,5 +96,43 @@ export class ReservaVuelosComponent {
     precio:320000,
     duracion:'1h 30m,',
     }
-  ]
+  ];
+  constructor(){}
+
+
+  // metodo de buscar vuelos
+  buscarVuelos():void{
+    if(this.origen.trim()==''){
+      alert('Por Favor Ingrese El Origen')
+      return
+    }
+    if(this.destino.trim()==''){
+      alert('Por Favor Ingrese El Destino')
+      return
+    }
+    if(this.fechaSalida===null){
+      alert('Por Favor Ingrese La Fecha de Salida')
+      return
+    }
+    if(this.pasajeros<1){
+      alert('Debe seleccionar al menos un pasajero')
+      return
+    }
+    this.cargando=true;
+    this.progreso=0;
+    this.progreso=25;
+    setTimeout(()=>{
+      this.progreso=50;
+    },500);
+    setTimeout(()=>{
+      this.progreso=75;
+    },1000);
+    setTimeout(()=>{
+      this.progreso=100;
+    },1500);
+    setTimeout(()=>{
+      this.cargando=false;
+      alert('Busqueda finalizada')
+    },200.);
+  }
 }
