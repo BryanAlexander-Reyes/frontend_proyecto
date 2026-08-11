@@ -44,6 +44,16 @@ export class ContenidoDinamicoComponet {
       imagen:'https://picsum.photos/id/1035/600/400',
       texto:'Explora nuestros recursos educativos',
       boton:'Explorar'
+    },
+    {
+      imagen:'https://picsum.photos/id/85/600/400',
+      texto:'Explora nuestros recursos educativos',
+      boton:'Explorar'
+    },
+    {
+      imagen:'https://picsum.photos/id/10/600/400',
+      texto:'Explora nuestros recursos educativos',
+      boton:'Explorar'
     }
   ];
 
