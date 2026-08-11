@@ -12,8 +12,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // el dialog es como un alert casi nunca se va a utilizar
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from "../../../../../node_modules/@angular/common/types/_common_module-chunk";
-import { DecimalPipe } from '../../../../../node_modules/@angular/common/types/_common_module-chunk';
+import { NgIf } from '@angular/common';
+
 
 interface  Vuelo{
   id:number;
@@ -39,7 +39,7 @@ interface  Vuelo{
     MatProgressSpinnerModule,
     FormsModule,
     NgIf,
-    DecimalPipe,
+    
 ],
   templateUrl: './reserva-vuelos.html',
   styleUrl: './reserva-vuelos.css',
@@ -135,4 +135,20 @@ export class ReservaVuelosComponent {
       alert('Busqueda finalizada')
     },200.);
   }
+  limpiarBusqueda():void{
+      this.origen='',
+      this.destino='',
+      this.fechaSalida=null,
+      this.pasajeros=1,
+      this.progreso=0,
+      this.cargando=false
+    }
+  
+  reservar(vuelo:Vuelo):void{
+    alert('vuelo seleccionado: \n\n'+'origen: '+vuelo.origin+ '\n' + 'Destino: ' + vuelo.destino+'\n'+
+      'Hora' + vuelo.hora+'\n'+ 'Duracion'+vuelo.duracion+'\n'+'precio:' +vuelo.precio
+
+    )
+  }
+
 }

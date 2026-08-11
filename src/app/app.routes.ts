@@ -10,6 +10,7 @@ import { UsersComponent } from './pages/users/users';
 import { LayoutComponent } from './layout/layout/layout';
 import { authGuard } from './guards/auth-guard';
 import { ContenidoDinamicoComponet } from './pages/contenido-dinamico/contenido-dinamico';
+import { ReservaVuelosComponent } from './pages/vuelos/reserva-vuelos/reserva-vuelos';
 // Definición de rutras de la aplicación 
 
 
@@ -37,6 +38,11 @@ export const routes: Routes = [
         {
             path:'contenido',
             component:ContenidoDinamicoComponet
+        }
+        ,
+        {
+            path:'vuelos',
+            component:ReservaVuelosComponent
         }
       ]
     },

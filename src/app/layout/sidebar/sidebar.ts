@@ -68,6 +68,16 @@ export class SidebarComponent {
         'Instructor',
         'Aprendiz'
       ]
+    },
+    {
+      icono:'🛩️',
+      nombre:'Material',
+      ruta:'/vuelos',
+      roles:[
+        'Administrador',
+        'Instructor',
+        'Aprendiz'
+      ]
     }
   ];
   private cargarMenu():void{
