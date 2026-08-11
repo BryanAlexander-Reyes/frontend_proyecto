@@ -58,6 +58,16 @@ export class SidebarComponent {
       roles:[
         'Administrador','Instructor','Aprendiz'
       ]
+    },
+    {
+      icono:'🛂',
+      nombre:'contenido',
+      ruta:'/contenido',
+      roles:[
+        'Administrador',
+        'Instructor',
+        'Aprendiz'
+      ]
     }
   ];
   private cargarMenu():void{
