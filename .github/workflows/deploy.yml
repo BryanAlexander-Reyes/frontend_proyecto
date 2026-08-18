@@ -1,0 +1,56 @@
+# esto es para despliegue
+
+name: deploy angular to github pages
+
+on:
+  push:
+    branches:
+      - release
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs: 
+  bild: 
+    name: Build Angular
+    runs-on: ubuntu-lastest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+      
+
+      - name: Build Angular
+        run: npm run build --base-href /frontend_proyecto/
+
+      - name: Upload Github Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dis/frontend_proyecto/browser
+
+  deploy:
+    name: deploy to github pages
+    needs: build
+    runs-on: ubuntu-lastest
+
+
+    environment: 
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

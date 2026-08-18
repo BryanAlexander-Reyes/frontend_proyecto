@@ -17,7 +17,7 @@ import { NgIf } from '@angular/common';
 
 interface  Vuelo{
   id:number;
-  origin:string;
+  origen:string;
   destino:string;
   hora:string;
   precio:number;
@@ -66,7 +66,7 @@ export class ReservaVuelosComponent {
   vuelos:Vuelo[]=[
     {
       id:1,
-    origin:'Bogota',
+    origen:'Bogota',
     destino:'Medellin',
     hora:'8:30',
     precio:180000,
@@ -74,7 +74,7 @@ export class ReservaVuelosComponent {
     },
     {
       id:2,
-    origin:'Bogota',
+    origen:'Bogota',
     destino:'Cali',
     hora:'15:40',
     precio:190000,
@@ -82,7 +82,7 @@ export class ReservaVuelosComponent {
     },
     {
     id:3,
-    origin:'Bogota',
+    origen:'Bogota',
     destino:'Cartagena',
     hora:'7:30',
     precio:800000,
@@ -90,7 +90,7 @@ export class ReservaVuelosComponent {
     },
     {
     id:4,
-    origin:'Bogota',
+    origen:'Bogota',
     destino:'Barranquilla',
     hora:'16:20',
     precio:320000,
@@ -145,7 +145,7 @@ export class ReservaVuelosComponent {
     }
   
   reservar(vuelo:Vuelo):void{
-    alert('vuelo seleccionado: \n\n'+'origen: '+vuelo.origin+ '\n' + 'Destino: ' + vuelo.destino+'\n'+
+    alert('vuelo seleccionado: \n\n'+'origen: '+vuelo.origen+ '\n' + 'Destino: ' + vuelo.destino+'\n'+
       'Hora' + vuelo.hora+'\n'+ 'Duracion'+vuelo.duracion+'\n'+'precio:' +vuelo.precio
 
     )
