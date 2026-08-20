@@ -1,0 +1,55 @@
+<main class="fixture-page">
+	<header class="fixture-header">
+		<div>
+			<p class="eyebrow">Torneo apertura · 2024</p>
+			<h1>Fixture</h1>
+			<p class="intro">Selecciona un equipo por partido para construir la siguiente ronda.</p>
+		</div>
+		<button class="reset-button" type="button" (click)="resetFixture()" aria-label="Reiniciar fixture">
+			<span aria-hidden="true">↺</span>
+			Reiniciar
+		</button>
+	</header>
+
+	<section class="bracket" aria-label="Llaves del torneo">
+		@for (round of rounds; track round.title; let roundIndex = $index) {
+			<section class="round" [class.final-round]="roundIndex === rounds.length - 1">
+				<div class="round-heading">
+					<span>{{ roundIndex + 1 | number: '2.0-0' }}</span>
+					<h2>{{ round.title }}</h2>
+				</div>
+
+				<div class="matches">
+					@for (match of round.matches; track match.id; let matchIndex = $index) {
+						<article class="match" [class.match-complete]="match.winner">
+							<div class="match-meta">
+								<span>Partido {{ matchIndex + 1 | number: '2.0-0' }}</span>
+								<time>{{ match.date }}</time>
+							</div>
+							<div class="team-options">
+								<button type="button" [class.selected]="match.winner === match.teamA"
+									[disabled]="!match.teamA" (click)="selectWinner(roundIndex, matchIndex, match.teamA)">
+									<span class="team-name">{{ match.teamA || 'Ganador partido ' + ((matchIndex * 2) + 1) }}</span>
+									<span class="team-mark" aria-hidden="true">{{ match.winner === match.teamA ? '✓' : '' }}</span>
+								</button>
+								<div class="versus">vs</div>
+								<button type="button" [class.selected]="match.winner === match.teamB"
+									[disabled]="!match.teamB" (click)="selectWinner(roundIndex, matchIndex, match.teamB)">
+									<span class="team-name">{{ match.teamB || 'Ganador partido ' + ((matchIndex * 2) + 2) }}</span>
+									<span class="team-mark" aria-hidden="true">{{ match.winner === match.teamB ? '✓' : '' }}</span>
+								</button>
+							</div>
+						</article>
+					}
+				</div>
+			</section>
+		}
+	</section>
+
+	<footer class="fixture-note">
+		<span class="status-dot"></span>
+		<span>Los partidos avanzan celda por celda</span>
+	</footer>
+</main>
+
+
